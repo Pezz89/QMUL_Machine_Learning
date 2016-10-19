@@ -19,34 +19,23 @@ function theta = gradient_descent(X, y, theta, alpha, iterations, do_plot)
         % gradient descent
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-        theta_0 = theta(1);
-        theta_1 = theta(2);
+        % fill temporary array with values of theta
+        theta_temp = theta;
+        for ind = 1:length(theta_temp)
+            %update theta(1) and store in temporary variable theta_0
+            sigma = 0.0;
 
-        %update theta(1) and store in temporary variable theta_0
-        sigma = 0.0;
+            for i = 1:m
+                hypothesis = calculate_hypothesis(X, theta, i);
+                output = y(i);
+                sigma = sigma + (hypothesis - output) * X(i, ind);
+            end
 
-        for i = 1:m
-            hypothesis = calculate_hypothesis(X, theta, i);
-            output = y(i);
-            sigma = sigma + (hypothesis - output);
+            theta_temp(ind) = theta_temp(ind) - ((alpha * 1.0) / m) * sigma;
         end
-
-        theta_0 = theta_0 - ((alpha * 1.0) / m) * sigma;
-
-
-        %update theta(2) and store in temporary variable theta_1
-        sigma = 0.0;
-
-        for i = 1:m
-            hypothesis = calculate_hypothesis(X, theta, i);
-            output = y(i);
-            sigma = sigma + (hypothesis - output) * X(i, 2);
-        end
-
-        theta_1 = theta_1 - ((alpha * 1.0) / m) * sigma;
 
         %update theta
-        theta = [theta_0, theta_1];
+        theta = theta_temp;
 
         %update cost_vector
         cost_vector = [cost_vector; compute_cost(X, y, theta)];
