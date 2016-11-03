@@ -11,4 +11,4 @@ iterations = 50;
 do_plot = true;
 
 %% run gradient descent
-t = gradient_descent(X, y, theta, alpha, iterations, do_plot);
+t = gradient_descent(X, y, theta, alpha, iterations, do_plot)
