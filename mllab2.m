@@ -10,10 +10,13 @@ X = [ones(size(X, 1), 1), X];
 
 %initialise theta
 theta = [0.0, 0.0, 0.0];
+% Learning rate
 alpha = 0.2;
+% Number of iterations for calculating theta values in gradient descent
 iterations = 100;
 
-%% 
+% Perform gradient descent on data to calculate the values for theta that make
+% the best hypothesis function.
 t = gradient_descent(X, y, theta, alpha, iterations, false)
 
 % Declare new pair of input features with which to calculate a predicted output
