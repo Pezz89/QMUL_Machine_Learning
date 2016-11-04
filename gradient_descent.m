@@ -1,4 +1,4 @@
-function theta = gradient_descent(X, y, theta, alpha, iterations, do_plot)
+function theta = gradient_descent(X, y, theta, alpha, iterations, l, do_plot)
     %GRADIENT_DESCENT do Gradient Descent for a given X, y, theta, alpha
     %for a specified number of iterations
 
@@ -31,14 +31,20 @@ function theta = gradient_descent(X, y, theta, alpha, iterations, do_plot)
                 sigma = sigma + (hypothesis - output) * X(i, ind);
             end
 
-            theta_temp(ind) = theta_temp(ind) - ((alpha * 1.0) / m) * sigma;
+            % theta_temp(ind) = theta_temp(ind) - ((alpha * 1.0) / m) * sigma;
+            if ind > 1
+                theta_temp(ind) = (theta_temp(ind) * (1.0-alpha*(l/m))) - ((alpha * 1.0) / m) * sigma;
+            else
+                theta_temp(ind) = theta_temp(ind) - ((alpha * 1.0) / m) * sigma;
+            end
+
         end
 
         %update theta
         theta = theta_temp;
 
         %update cost_vector
-        cost_vector = [cost_vector; compute_cost(X, y, theta)];
+        cost_vector = [cost_vector; compute_cost_regularised(X, y, theta, l)];
 
         if do_plot
             plot_hypothesis(X, y, theta);
