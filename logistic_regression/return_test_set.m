@@ -1,8 +1,4 @@
-
-
-	
-
-    function [training_input,training_output,test_input,test_output]=return_test_set(X,y,test)
+function [training_input,training_output,test_input,test_output]=return_test_set(X,y,test)
 	% create a list of random indexes
 	scrambled_indexes = randperm(size(X,1));
 	
