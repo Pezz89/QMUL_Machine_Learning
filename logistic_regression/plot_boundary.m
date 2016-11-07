@@ -10,7 +10,7 @@ function plot_boundary(x,theta)
     min_x1=min_x1 - 1;
 
     % Rearange the hypothetis equation in terms of x2
-    x2 = -(theta(2)*x(:,2)+theta(1))/theta(3)
+    x2 = -(theta(2)*x(:,2)+theta(1))/theta(3);
 
     % modify this:
     y1 = x2(min_ind);
