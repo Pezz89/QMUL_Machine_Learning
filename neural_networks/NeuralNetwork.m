@@ -86,9 +86,9 @@ classdef NeuralNetwork < handle
                         test_errors=[test_errors, NeuralNetwork.get_error(test_set_input,test_set_output,nn)];
                     end
                 end
-                if mod(i , 10) == 0
-                    display([ 'cost = ',num2str(error)])
-                end
+                %if mod(i , 10) == 0
+                %    display([ 'cost = ',num2str(error)])
+                %end
                 if exist('is_iris')
                     if is_iris
                         if mod(i, 100) == 0
@@ -125,7 +125,14 @@ classdef NeuralNetwork < handle
             hidden_deltas = zeros(1,length(nn.hidden_neurons));
             % hint... create a for loop here to iterate over the hidden neurons and for each
             % hidden neuron create another for loop to iterate over the ouput neurons
-
+            
+            for j=1:length(nn.hidden_neurons)
+                accum = 0.0;
+                for k=1:length(nn.output_neurons)
+                   accum = accum + nn.output_weights(j,k)*output_deltas(k);
+                end
+                hidden_deltas(j) = nn.hidden_neurons(j)*accum;
+            end
 
             % Step 3. update weights output --> hidden
             for i=1:length(nn.hidden_neurons)
@@ -141,6 +148,11 @@ classdef NeuralNetwork < handle
             % Step 4. update weights input --> hidden.
             % hint, use a similar process to step 3, except iterate over the input neurons and hidden deltas
 
+            for j=1:length(inputs)
+                for k=1:length(hidden_deltas)
+                    nn.hidden_weights(j,k) =nn.hidden_weights(j,k) -(hidden_deltas(k) * inputs(j) * learning_rate);
+                end
+            end
 
             % this is our cost function
             J = 0.0;

@@ -6,8 +6,10 @@
 [X,mean,std] = normalise_features(X);
 
 % after normalising we add the bias
-X=[ones(size(X,1),1),X];
-theta=ones(1,3);
+%X=[ones(size(X,1),1),X];
+
+X=[ones(size(X,1),1),X,X(:,1).*X(:,2),X(:,1).^2,X(:,2).^2];
+theta=ones(1,size(X,2));
 
 % for question 7, modify the dataset X to have more features (in each row)
 	% append to X(i),the following features:

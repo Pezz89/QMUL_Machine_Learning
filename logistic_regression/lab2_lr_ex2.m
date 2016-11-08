@@ -5,10 +5,16 @@
 [X,mean,std] = normalise_features(X);
 
 % after normalising we add the bias
-X=[ones(size(X,1),1),X];
-
+%X=[ones(size(X,1),1),X];
+% size(X)
+% 
+% xtemp = X(:,2) .* X(:,3)
+% xtemp2 = X(:,2)^2
+% xtemp3 = X(:,3)^2
+% 
+X=[ones(size(X,1),1),X,X(:,1).*X(:,2),X(:,1).^2,X(:,2).^2];
 % initialise theta
-theta=[1.0,1.0,1.0];
+theta=[1.0,1.0,1.0,1.0,1.0]
 
 alpha = 0.1;
 iterations = 100;

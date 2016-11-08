@@ -25,6 +25,8 @@ function [theta,cost_array_training]=gradient_descent_training(X,y,test_X,test_y
 
         % update cost_array
         % add code here: to update cost_array_training and cost_array_test
+        cost_array_training(it)=compute_cost(X, y, theta);
+        cost_array_test(it)=compute_cost(test_X, test_y, theta);
 
     end
     % this plots our cost over time:
