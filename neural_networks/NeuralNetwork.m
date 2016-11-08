@@ -86,9 +86,9 @@ classdef NeuralNetwork < handle
                         test_errors=[test_errors, NeuralNetwork.get_error(test_set_input,test_set_output,nn)];
                     end
                 end
-                %if mod(i , 10) == 0
-                %    display([ 'cost = ',num2str(error)])
-                %end
+                if mod(i , 10) == 0
+                    display([ 'cost = ',num2str(error)])
+                end
                 if exist('is_iris')
                     if is_iris
                         if mod(i, 100) == 0
